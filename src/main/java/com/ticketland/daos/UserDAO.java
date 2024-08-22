@@ -1,11 +1,13 @@
 package com.ticketland.daos;
 
 import com.ticketland.entities.User;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserDAO {
     private final List<User> users;
 

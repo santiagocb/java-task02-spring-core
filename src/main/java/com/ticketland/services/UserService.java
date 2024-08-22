@@ -2,17 +2,26 @@ package com.ticketland.services;
 
 import com.ticketland.daos.UserDAO;
 import com.ticketland.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class UserService {
 
-    UserDAO userDAO;
+    @Autowired
+    private UserDAO userDAO;
 
-    public UserService(UserDAO userDao) {
-        this.userDAO = userDao;
+    public UserService() {
     }
 
     public void registerUser(User user) {
         userDAO.createUser(user);
+    }
+
+    public Optional<User> getUserById(String userId) {
+        return userDAO.getUserById(userId);
     }
 
     public void showUsers() {

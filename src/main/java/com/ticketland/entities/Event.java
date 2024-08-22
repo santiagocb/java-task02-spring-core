@@ -1,3 +1,5 @@
 package com.ticketland.entities;
 
-public record Event(String id, String place, Location location, int capacity) {}
+import java.time.LocalDate;
+
+public record Event(String id, String name, String place, Location location, LocalDate date) {}

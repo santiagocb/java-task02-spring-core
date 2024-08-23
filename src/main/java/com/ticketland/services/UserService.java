@@ -13,9 +13,6 @@ public class UserService {
     @Autowired
     private UserDAO userDAO;
 
-    public UserService() {
-    }
-
     public void registerUser(User user) {
         userDAO.createUser(user);
     }
@@ -25,6 +22,7 @@ public class UserService {
     }
 
     public void showUsers() {
+        System.out.println("All registered users:");
         userDAO.getUsers().forEach(System.out::println);
     }
 

@@ -1,18 +1,19 @@
 package com.ticketland.daos;
 
 import com.ticketland.entities.User;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Repository
 public class UserDAO {
-    private final List<User> users;
+
+    @Autowired
+    private List<User> users;
 
     public UserDAO() {
-        users = new ArrayList<>();
     }
 
     public void createUser(User user) {

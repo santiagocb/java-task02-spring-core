@@ -1,19 +1,19 @@
 package com.ticketland.daos;
 
 import com.ticketland.entities.Event;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Repository
 public class EventDAO {
 
-    private final List<Event> events;
+    @Autowired
+    private List<Event> events;
 
     public EventDAO() {
-        events = new ArrayList<>();
     }
 
     public void createEvent(Event event) {

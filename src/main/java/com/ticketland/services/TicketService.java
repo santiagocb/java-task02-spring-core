@@ -14,9 +14,6 @@ public class TicketService {
     @Autowired
     TicketDAO ticketDAO;
 
-    public TicketService() {
-    }
-
     public Ticket generateTicket(TicketType ticketType, User user, Event event) {
         return ticketDAO.createTicket(user, event, ticketType);
     }

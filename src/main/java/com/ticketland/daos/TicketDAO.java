@@ -4,17 +4,21 @@ import com.ticketland.entities.Event;
 import com.ticketland.entities.Ticket;
 import com.ticketland.entities.TicketType;
 import com.ticketland.entities.User;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
-@Service
+@Repository
 public class TicketDAO {
 
-    private final HashMap<Event, List<Ticket>> tickets;
+    @Autowired
+    private HashMap<Event, List<Ticket>> tickets;
 
     private TicketDAO() {
-        tickets = new HashMap<>();
     }
 
     public Ticket createTicket(User user, Event event, TicketType ticketType) {

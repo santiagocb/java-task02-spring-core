@@ -18,13 +18,16 @@ public class Application {
         EventService eventService = context.getBean(EventService.class);
         UserService userService = context.getBean(UserService.class);
         TicketService ticketService = context.getBean(TicketService.class);
+        
+        userService.showUsers();
+        eventService.showAllEvents();
 
         // Create a user
-        User user = new User("01", "Tanjiro Kamado", "tanjiro@kamado.com");
+        User user = new User("06", "Tanjiro Kamado", "tanjiro@kamado.com");
         userService.registerUser(user);
 
         // Create an event
-        Event event = new Event("11", "ComiCon2024", "Plaza Mayor", new Location(-124, 2), LocalDate.of(2024, Month.NOVEMBER, 22));
+        Event event = new Event("001", "ComiCon2024", "Plaza Mayor", new Location(-124, 2), LocalDate.parse("2024-12-19"));
         eventService.registerEvent(event);
 
         // Get a ticket
@@ -32,6 +35,6 @@ public class Application {
 
         System.out.printf("Ticket %s purchased: [%s]%s has 1 entry to %s in %s on %s%n", ticket.id(), user.id(), user.name(), event.name(), event.place(), event.date().toString());
 
-        userService.showUsers();
+
     }
 }

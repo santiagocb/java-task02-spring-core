@@ -8,8 +8,11 @@ import com.ticketland.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TicketService {
+
 
     @Autowired
     TicketDAO ticketDAO;
@@ -20,5 +23,13 @@ public class TicketService {
 
     public void disableTicket(Event event, String ticketId) {
         ticketDAO.removeTicket(event, ticketId);
+    }
+
+    public Ticket getTicketByEvent(Event event, String ticketId) {
+        return ticketDAO.getTicketByEvent(event, ticketId).orElseThrow();
+    }
+
+    public List<Ticket> getTicketsByEvent(Event event) {
+        return ticketDAO.getTicketsByEvent(event);
     }
 }

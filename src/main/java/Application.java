@@ -1,13 +1,11 @@
 import com.ticketland.config.ApplicationConfig;
 import com.ticketland.entities.*;
+import com.ticketland.programs.BookingService;
 import com.ticketland.services.EventService;
 import com.ticketland.services.TicketService;
 import com.ticketland.services.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.time.LocalDate;
-import java.time.Month;
 
 public class Application {
 
@@ -18,23 +16,23 @@ public class Application {
         EventService eventService = context.getBean(EventService.class);
         UserService userService = context.getBean(UserService.class);
         TicketService ticketService = context.getBean(TicketService.class);
-        
+        BookingService bookingService = context.getBean(BookingService.class);
+
         userService.showUsers();
         eventService.showAllEvents();
 
-        // Create a user
-        User user = new User("06", "Tanjiro Kamado", "tanjiro@kamado.com");
-        userService.registerUser(user);
-
-        // Create an event
-        Event event = new Event("001", "ComiCon2024", "Plaza Mayor", new Location(-124, 2), LocalDate.parse("2024-12-19"));
-        eventService.registerEvent(event);
+        var user = userService.getUserById("02");
+        var event = eventService.getEventById("001");
+        var eventNextDay = eventService.getEventById("002");
 
         // Get a ticket
-        Ticket ticket = ticketService.generateTicket(TicketType.VIP, user, event);
+        var ticketId1 = bookingService.createBooking(event.id(), user.id(), TicketType.VIP);
+        var ticketId2 = bookingService.createBooking(eventNextDay.id(), user.id(), TicketType.VIP);
 
-        System.out.printf("Ticket %s purchased: [%s]%s has 1 entry to %s in %s on %s%n", ticket.id(), user.id(), user.name(), event.name(), event.place(), event.date().toString());
+        // Cancel first ticket because of a situation
+        bookingService.cancelBooking(event.id(), ticketId2);
 
-
+        bookingService.showTicketById(event.id(), ticketId1);
+        bookingService.showAllTicketsByEvent(event.id());
     }
 }

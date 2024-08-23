@@ -18,8 +18,8 @@ public class EventService {
         eventDAO.createEvent(event);
     }
 
-    public Optional<Event> getEventById(String eventId) {
-        return eventDAO.getEventById(eventId);
+    public Event getEventById(String eventId) {
+        return eventDAO.getEventById(eventId).orElseThrow();
     }
 
     public void showAllEvents() {

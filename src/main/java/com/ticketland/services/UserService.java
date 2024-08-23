@@ -17,8 +17,8 @@ public class UserService {
         userDAO.createUser(user);
     }
 
-    public Optional<User> getUserById(String userId) {
-        return userDAO.getUserById(userId);
+    public User getUserById(String userId) {
+        return userDAO.getUserById(userId).orElseThrow();
     }
 
     public void showUsers() {

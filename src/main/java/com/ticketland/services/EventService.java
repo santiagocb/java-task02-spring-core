@@ -2,14 +2,16 @@ package com.ticketland.services;
 
 import com.ticketland.daos.EventDAO;
 import com.ticketland.entities.Event;
+import com.ticketland.programs.BookingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class EventService {
+
+    public static final Logger logger = LoggerFactory.getLogger(BookingService.class);
 
     @Autowired
     EventDAO eventDAO;
@@ -23,8 +25,9 @@ public class EventService {
     }
 
     public void showAllEvents() {
-        System.out.println("All available events:");
-        eventDAO.getEvents().forEach(System.out::println);
+        logger.info("All available events:");
+
+        eventDAO.getEvents().forEach(u -> logger.info(u.toString()));
     }
 
 }

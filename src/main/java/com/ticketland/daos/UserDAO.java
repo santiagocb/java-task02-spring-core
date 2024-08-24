@@ -1,7 +1,6 @@
 package com.ticketland.daos;
 
 import com.ticketland.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,10 +9,10 @@ import java.util.Optional;
 @Repository
 public class UserDAO {
 
-    @Autowired
-    private List<User> users;
+    private final List<User> users;
 
-    public UserDAO() {
+    public UserDAO(List<User> users) {
+        this.users = users;
     }
 
     public void createUser(User user) {

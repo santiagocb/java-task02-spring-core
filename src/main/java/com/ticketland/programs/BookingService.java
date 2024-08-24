@@ -4,13 +4,14 @@ import com.ticketland.entities.TicketType;
 import com.ticketland.services.EventService;
 import com.ticketland.services.TicketService;
 import com.ticketland.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingService implements BookingFacade {
 
-
-    private final String SEPARATOR = "–––––––––––––––––––––";
+    public static final Logger logger = LoggerFactory.getLogger(BookingService.class);
 
     UserService userService;
     EventService eventService;
@@ -20,6 +21,7 @@ public class BookingService implements BookingFacade {
         this.userService = userService;
         this.eventService = eventService;
         this.ticketService = ticketService;
+        logger.debug("Booking service created");
     }
 
     @Override
@@ -27,17 +29,15 @@ public class BookingService implements BookingFacade {
         var event = eventService.getEventById(eventId);
         var user = userService.getUserById(userId);
         var ticket = ticketService.generateTicket(ticketType, user, event);
-        System.out.printf("Ticket %s purchased: [%s]%s has 1 entry to %s in %s on %s%n",
-                ticket.id(), user.id(), user.name(), event.name(), event.place(), event.date().toString());
-        System.out.println(SEPARATOR);
+        logger.info(String.format("Ticket purchased [%s] ::: [%s]%s has 1 %s entry to %s in %s on %s",
+                ticket.id(), user.id(), user.name(), ticketType, event.name(), event.place(), event.date().toString()));
         return ticket.id();
     }
 
     @Override
     public void cancelBooking(String eventId, String ticketId) {
         var event = eventService.getEventById(eventId);
-        System.out.printf("Canceling ticket %s: Entry for %s was removed from the system%n", ticketId, event.name());
-        System.out.println(SEPARATOR);
+        logger.info(String.format("Canceling ticket %s: Entry for %s was removed from the system%n", ticketId, event.name()));
         ticketService.disableTicket(event, ticketId);
     }
 
@@ -45,14 +45,13 @@ public class BookingService implements BookingFacade {
     public void showTicketById(String eventId, String ticketId) {
         var event = eventService.getEventById(eventId);
         var ticket = ticketService.getTicketByEvent(event, ticketId);
-        System.out.printf("Ticket %s information: %s%n", ticketId, ticket);
-        System.out.println(SEPARATOR);
+        logger.info(String.format("Ticket %s information: %s%n", ticketId, ticket));
     }
 
     @Override
     public void showAllTicketsByEvent(String eventId) {
         var event = eventService.getEventById(eventId);
-        System.out.printf("All the tickets for [%s] %s: %n", event.id(), event.name());
-        ticketService.getTicketsByEvent(event).forEach(System.out::println);
+        logger.info(String.format("All the tickets for [%s] %s:", event.id(), event.name()));
+        ticketService.getTicketsByEvent(event).forEach(t -> logger.info(t.toString()));
     }
 }

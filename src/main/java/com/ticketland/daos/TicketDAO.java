@@ -12,10 +12,14 @@ import java.util.*;
 @Repository
 public class TicketDAO {
 
-    @Autowired
     private HashMap<Event, List<Ticket>> tickets;
 
     private TicketDAO() {
+    }
+
+    @Autowired
+    void setTickets(HashMap<Event, List<Ticket>> tickets) {
+        this.tickets = tickets;
     }
 
     public Ticket createTicket(User user, Event event, TicketType ticketType) {

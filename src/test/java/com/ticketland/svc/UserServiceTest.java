@@ -9,9 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +28,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void userServiceShouldRegisterAnUser() {
+    public void getAnUserById() {
         // Given
         var user = new User("idTest1", "UserTest1", "email@test1.com");
 
@@ -37,5 +39,16 @@ public class UserServiceTest {
 
         // Then
         assertEquals(result, user);
+    }
+
+    @Test
+    public void getAnUserByIdAndThrowAGeneralExceptionWhenUserNotFound() {
+        // Given
+        var user = new User("idTest1", "UserTest1", "email@test1.com");
+
+        when(userDAO.getUserById(anyString())).thenReturn(Optional.empty());
+
+        // When - Then
+        assertThrows(NoSuchElementException.class, () -> userService.getUserById("idTest1"));
     }
 }

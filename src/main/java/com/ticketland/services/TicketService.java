@@ -32,4 +32,8 @@ public class TicketService {
     public List<Ticket> getTicketsByEvent(Event event) {
         return ticketDAO.getTicketsByEvent(event);
     }
+
+    public List<Ticket> getAllTickets() {
+        return ticketDAO.getAllTickets();
+    }
 }

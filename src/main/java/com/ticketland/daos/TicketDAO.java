@@ -48,6 +48,10 @@ public class TicketDAO {
         return tickets.get(event);
     }
 
+    public List<Ticket> getAllTickets() {
+        return tickets.values().stream().flatMap(Collection::stream).toList();
+    }
+
     private String generateRandomTicketNumber() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();

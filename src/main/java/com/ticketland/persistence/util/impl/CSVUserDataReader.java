@@ -1,10 +1,11 @@
-package com.ticketland.persistence.util;
+package com.ticketland.persistence.util.impl;
 
 import com.ticketland.entities.User;
+import com.ticketland.persistence.util.CSVDataReader;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class CSVUserDataReader implements CSVDataReader<User> {
     private final List<User> users;
 
     @Value("classpath:users-data.csv")
-    private Resource userResource;
+    private File userResource;
 
 
     public CSVUserDataReader() {
@@ -25,9 +26,8 @@ public class CSVUserDataReader implements CSVDataReader<User> {
 
     public List<User> getDataFromCSV() {
         try {
-            var content = userResource.getFile();
 
-            Scanner myReader = new Scanner(content);
+            Scanner myReader = new Scanner(userResource);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] raw = data.split(",");

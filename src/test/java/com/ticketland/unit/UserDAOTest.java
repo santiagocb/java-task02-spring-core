@@ -22,7 +22,7 @@ public class UserDAOTest {
 
     @Test
     @DisplayName("UserDAO should get an user by id")
-    public void userDAOShouldGetAnUserByID() {
+    public void getAnUserByID() {
         // Given
         UserDAO userDAO = new UserDAO(users);
 
@@ -35,7 +35,7 @@ public class UserDAOTest {
     }
 
     @Test
-    public void userDAOShouldCreateAnUser() {
+    public void createAnUser() {
         // Given
         UserDAO userDAO = new UserDAO(users);
 
@@ -50,13 +50,13 @@ public class UserDAOTest {
     }
 
     @Test
-    public void userDAOShouldGetAllUsers() {
+    public void getAllUsers() {
         // Given
         UserDAO userDAO = new UserDAO(users);
 
         // When
         var result = userDAO.getUsers();
-        var expected = List.of(new User("idTest2", "UserTest2", "email@test2.com"));
+        var expected = List.of(new User("idTest1", "UserTest1", "email@test1.com"));
 
         // Then
         assertIterableEquals(result, expected);

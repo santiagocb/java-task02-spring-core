@@ -1,11 +1,12 @@
-package com.ticketland.persistence.util;
+package com.ticketland.persistence.util.impl;
 
 import com.ticketland.entities.Event;
 import com.ticketland.entities.Location;
+import com.ticketland.persistence.util.CSVDataReader;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class CSVEventDataReader implements CSVDataReader<Event> {
     private final List<Event> events;
 
     @Value("classpath:events-data.csv")
-    private Resource eventResource;
+    private File eventResource;
 
     public CSVEventDataReader() {
         events = new ArrayList<>();
@@ -27,9 +28,7 @@ public class CSVEventDataReader implements CSVDataReader<Event> {
     @Override
     public List<Event> getDataFromCSV() {
         try {
-            var content = eventResource.getFile();
-
-            Scanner myReader = new Scanner(content);
+            Scanner myReader = new Scanner(eventResource);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] raw = data.split(",");

@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface CSVDataReader<T> {
 
-    List<T> getDataFromCSV();
+    List<T> getDataFromCSV(String filePath);
 }

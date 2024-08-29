@@ -1,4 +1,4 @@
-package com.ticketland.svc.persistence.util;
+package com.ticketland.config.persistence.util;
 
 import com.ticketland.entities.User;
 import com.ticketland.persistence.util.impl.CSVUserDataReader;
@@ -31,7 +31,7 @@ public class CSVUserDataReaderTest {
         ConfigurableEnvironment environment = context.getEnvironment();
         environment.getPropertySources().addFirst(
                 new MapPropertySource("testProperties",
-                        java.util.Collections.singletonMap("file.path", "classpath:users-data.csv"))
+                        java.util.Collections.singletonMap("file.path", "classpath:users.csv"))
         );
 
         // Add the PropertySourcesPlaceholderConfigurer to the context
@@ -44,7 +44,7 @@ public class CSVUserDataReaderTest {
         var expected = new User("TestId1", "TestName1", "TestEmail1");
 
         // When
-        var userListFromFile = csvUserDataReader.getDataFromCSV();
+        var userListFromFile = csvUserDataReader.getDataFromCSV("users.csv");
 
         // Then
         assertEquals(expected, userListFromFile.get(0));

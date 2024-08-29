@@ -1,9 +1,8 @@
-package com.ticketland.svc;
+package com.ticketland.services;
 
 import com.ticketland.daos.EventDAO;
 import com.ticketland.entities.Event;
 import com.ticketland.entities.Location;
-import com.ticketland.services.EventService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,9 +28,8 @@ public class EventServiceTest {
     @InjectMocks
     EventService eventService;
 
-
     @Test
-    public void registerAnUser() {
+    public void getEventById() {
         // Given
         var event = new Event("eventId1", "eventName1", "placeTest1", new Location(0, 0), LocalDate.now());
 

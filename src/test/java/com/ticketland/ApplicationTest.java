@@ -1,4 +1,4 @@
-package com.ticketland.svc;
+package com.ticketland;
 
 import com.ticketland.entities.Event;
 import com.ticketland.entities.Ticket;

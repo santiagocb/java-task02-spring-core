@@ -1,4 +1,4 @@
-package com.ticketland.svc;
+package com.ticketland.services;
 
 import com.ticketland.daos.UserDAO;
 import com.ticketland.entities.User;

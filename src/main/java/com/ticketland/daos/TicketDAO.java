@@ -14,7 +14,7 @@ public class TicketDAO {
 
     private HashMap<Event, List<Ticket>> tickets;
 
-    private TicketDAO() {
+    public TicketDAO() {
     }
 
     @Autowired

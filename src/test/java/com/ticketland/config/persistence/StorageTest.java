@@ -1,4 +1,4 @@
-package com.ticketland.svc.persistence;
+package com.ticketland.config.persistence;
 
 import com.ticketland.entities.User;
 import com.ticketland.persistence.Storage;
@@ -58,7 +58,7 @@ public class StorageTest {
         );
 
         // When
-        when(csvUserDataReader.getDataFromCSV()).thenReturn(expectedUsers);
+        when(csvUserDataReader.getDataFromCSV("users.csv")).thenReturn(expectedUsers);
 
         // Create and refresh the application context
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

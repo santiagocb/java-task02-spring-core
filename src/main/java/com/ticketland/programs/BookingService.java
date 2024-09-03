@@ -13,9 +13,9 @@ public class BookingService implements BookingFacade {
 
     public static final Logger logger = LoggerFactory.getLogger(BookingService.class);
 
-    UserService userService;
-    EventService eventService;
-    TicketService ticketService;
+    private final UserService userService;
+    private final EventService eventService;
+    private final TicketService ticketService;
 
     public BookingService(UserService userService, EventService eventService, TicketService ticketService) {
         this.userService = userService;

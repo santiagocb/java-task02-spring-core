@@ -1,6 +1,5 @@
 package com.ticketland.daos;
 
-import com.ticketland.daos.UserDAO;
 import com.ticketland.entities.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

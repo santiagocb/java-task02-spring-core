@@ -14,7 +14,7 @@ public class EventService {
     public static final Logger logger = LoggerFactory.getLogger(BookingService.class);
 
     @Autowired
-    EventDAO eventDAO;
+    private EventDAO eventDAO;
 
     public void registerEvent(Event event) {
         eventDAO.createEvent(event);

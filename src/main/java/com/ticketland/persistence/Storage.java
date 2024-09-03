@@ -33,10 +33,10 @@ public class Storage {
     private String eventsFilePath;
 
     @Autowired
-    CSVUserDataReader csvUserDataReader;
+    private CSVUserDataReader csvUserDataReader;
 
     @Autowired
-    CSVEventDataReader csvEventDataReader;
+    private CSVEventDataReader csvEventDataReader;
 
     public Storage() {
         events = new ArrayList<>();

@@ -13,9 +13,8 @@ import java.util.List;
 @Service
 public class TicketService {
 
-
     @Autowired
-    TicketDAO ticketDAO;
+    private TicketDAO ticketDAO;
 
     public Ticket generateTicket(TicketType ticketType, User user, Event event) {
         return ticketDAO.createTicket(user, event, ticketType);
